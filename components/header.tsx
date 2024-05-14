@@ -19,8 +19,11 @@ export default function Header() {
             <Link href='/protected/client'>Protected (client)</Link>
           </li>
           <li>
-            <Link href='/api/me'>Who am I?</Link>
+            <Link href='/protected/table'>tracker</Link>
           </li>
+          {/* <li>
+            <Link href='/api/me'>Who am I?</Link>
+          </li> */}
         </ul>
 
         <div className='flex items-center justify-between gap-6'>
