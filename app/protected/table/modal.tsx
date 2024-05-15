@@ -1,4 +1,17 @@
+"use client"
+
 import * as React from "react";
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+  } from "@/components/ui/popover"
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,6 +36,8 @@ interface CardWithFormProps {
 }
 
 export function CardWithForm({ onClose }: CardWithFormProps) {
+  const [date, setDate] = React.useState<Date>()
+
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -49,16 +64,41 @@ export function CardWithForm({ onClose }: CardWithFormProps) {
               <Input id="name" placeholder="Location..." />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="framework">Framework</Label>
+                <Label htmlFor="framework">Date Applied</Label>
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button
+                            variant={"outline"}
+                            className={cn(
+                                "w-[280px] justify-start text-left font-normal",
+                                !date && "text-muted-foreground"
+                            )}
+                            >
+                            <CalendarIcon className="mr-2 h-4 w-4" />
+                            {date ? format(date, "PPP") : <span>Pick a date</span>}
+                            </Button>
+                        </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" style={{ zIndex: 9999, }}>
+                        <Calendar
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                        initialFocus
+                        />
+                    </PopoverContent>
+                    </Popover>
+                </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="framework">Status</Label>
               <Select>
                 <SelectTrigger id="framework">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">Next.js</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
+                <SelectContent position="popper" style={{ zIndex: 9999, }}>
+                  <SelectItem value="next">Applying</SelectItem>
+                  <SelectItem value="sveltekit">Applied</SelectItem>
+                  <SelectItem value="astro">Interviewing</SelectItem>
+                  <SelectItem value="nuxt">Accepted</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -67,8 +107,9 @@ export function CardWithForm({ onClose }: CardWithFormProps) {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" onClick={onClose}>Cancel</Button>
-        <Button>Deploy</Button>
+        <Button>Add</Button>
       </CardFooter>
+
     </Card>
   );
 }

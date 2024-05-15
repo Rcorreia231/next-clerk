@@ -72,6 +72,7 @@ export function DataTable<TData, TValue>({
   })
 
   const [showCard, setShowCard] = React.useState(false);
+  
 
   const handleButtonClick = () => {
     setShowCard(true);
