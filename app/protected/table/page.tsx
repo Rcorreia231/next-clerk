@@ -14,6 +14,16 @@ async function getData(): Promise<Payment[]> {
       location: "California",
       date: "4/23/2024",
     },
+    {
+      id: "128ed52f",
+      company: "Microsoft",
+      amount: 150,
+      status: "processing",
+      email: "verstappan@example.com",
+      position: "IT aid",
+      location: "Texas",
+      date: "5/01/2024",
+    },
     // ...
   ]
 }

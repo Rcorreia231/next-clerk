@@ -29,8 +29,8 @@ export type Payment = {
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "position",
+    header: "Job Title",
   },
   {
     accessorKey: "company",
@@ -41,8 +41,8 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Location",
   },
   {
-    accessorKey: "position",
-    header: "Job Title",
+    accessorKey: "status",
+    header: "Status",
   },
   {
     accessorKey: "email",
@@ -57,6 +57,10 @@ export const columns: ColumnDef<Payment>[] = [
           </Button>
         )
       },
+  },
+  {
+    accessorKey: "date",
+    header: "Date Applied",
   },
   {
     accessorKey: "amount",
@@ -120,9 +124,5 @@ export const columns: ColumnDef<Payment>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
-  },
-  {
-    accessorKey: "date",
-    header: "Date Applied",
   },
 ]

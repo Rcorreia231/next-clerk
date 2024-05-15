@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { CardWithForm } from "./modal"; 
 import * as React from "react"
 
 import {
@@ -70,6 +71,16 @@ export function DataTable<TData, TValue>({
     },
   })
 
+  const [showCard, setShowCard] = React.useState(false);
+
+  const handleButtonClick = () => {
+    setShowCard(true);
+  };
+
+  const handleCloseCard = () => {
+    setShowCard(false);
+  };
+
   return (
     <div>
         <div className="flex items-center py-4">
@@ -81,7 +92,17 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-                <DropdownMenu>
+        <div style={{ zIndex: 9999, }}>
+        <Button onClick={handleButtonClick} className="ml-3 mr-3">+</Button>
+        {showCard && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"> 
+          <div className="relative">
+            <CardWithForm onClose={handleCloseCard} />
+          </div>
+        </div>
+        )}
+        </div>
+        <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
               Columns
